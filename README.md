@@ -1,4 +1,4 @@
-# Noor - Muslim Companion App
+# Noor - Muslim Companion App (WIP)
 
 *Noor* is a modern, beautifully designed Muslim Companion Progressive Web App (PWA) built with Vue 3, Vite, and Tailwind CSS. The app features a stunning Material Design 3 (MD3) interface, focusing on high engagement, seamless user experience, and aesthetic precision.
 
@@ -11,6 +11,8 @@
 - **Digital Tasbih**: A highly tactile and animated digital counter for your Dhikr needs.
 - **Amalan**: A dedicated space for daily spiritual activities, including Al-Ma'tsurat and selected Surahs.
 - **Auto-Deployment**: Integrated GitHub Actions for seamless deployment to GitHub Pages on every push to the `main` branch.
+
+> **Note**: This project is currently under development, will update new features soon.
 
 ## API Credits
 This project was made possible by the incredible work of the following open-source APIs:
