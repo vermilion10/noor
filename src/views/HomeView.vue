@@ -65,7 +65,37 @@ const getTodayJuz = () => {
 }
 
 const currentHijriDate = computed(() => {
-  return new Intl.DateTimeFormat('id-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date()) + ' H'
+  try {
+    const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-uma-nu-latn', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+    const parts = formatter.formatToParts(new Date());
+    const day = parts.find(p => p.type === 'day')?.value;
+    const monthEn = parts.find(p => p.type === 'month')?.value;
+    const year = parts.find(p => p.type === 'year')?.value;
+
+    const monthsId: Record<string, string> = {
+      'Muharram': 'Muharram',
+      'Safar': 'Safar',
+      'Rabiʻ I': 'Rabiul Awwal',
+      'Rabiʻ II': 'Rabiul Akhir',
+      'Jumada I': 'Jumadil Awwal',
+      'Jumada II': 'Jumadil Akhir',
+      'Rajab': 'Rajab',
+      'Shaʻban': 'Sya\'ban',
+      'Ramadan': 'Ramadhan',
+      'Shawwal': 'Syawal',
+      'Dhuʻl-Qiʻdah': 'Dzulqa\'dah',
+      'Dhuʻl-Hijjah': 'Dzulhijjah'
+    };
+
+    const monthId = monthEn ? (monthsId[monthEn] || monthEn) : '';
+    return `${day} ${monthId} ${year} H`;
+  } catch (e) {
+    return new Date().toLocaleDateString('id-ID'); 
+  }
 })
 </script>
 

@@ -12,6 +12,8 @@ export const useOdojStore = defineStore('odoj', () => {
   const dailyTargetAyat = ref(200)// f allback default
   const history = ref<DailyRecord[]>([])
   
+  const readAyahsToday = ref<Record<string, string[]>>({})
+
   const odojMode = ref<'hijri' | 'masehi'>('hijri')
 
   const getCurrentDateStr = (d: Date = new Date()) => {
@@ -38,6 +40,20 @@ export const useOdojStore = defineStore('odoj', () => {
     const record = getTodayRecord()
     record.ayatRead += ayat
     if (history.value.length > 365) history.value.shift()
+  }
+
+  const markAyahAsRead = (surahId: number | string, ayahNumber: number) => {
+    const today = getCurrentDateStr()
+    const key = `${surahId}:${ayahNumber}`
+    
+    if (!readAyahsToday.value[today]) {
+      readAyahsToday.value[today] = []
+    }
+    
+    if (!readAyahsToday.value[today].includes(key)) {
+      readAyahsToday.value[today].push(key)
+      addAyatRead(1)
+    }
   }
 
   const setDailyTarget = (target: number) => {
@@ -130,6 +146,7 @@ export const useOdojStore = defineStore('odoj', () => {
     syncTodayTarget,
     getTodayRecord,
     addAyatRead,
+    markAyahAsRead,
     setDailyTarget,
     todayProgressPercent,
     currentStreak,

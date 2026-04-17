@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useQuran } from '@/composables/useQuran'
 import { useQuranStore } from '@/stores/quranStore'
 import { useBookmarkStore } from '@/stores/bookmarkStore'
+import { useOdojStore } from '@/stores/odojStore'
 import { 
   ArrowLeft, 
   Play, 
@@ -21,18 +22,46 @@ const router = useRouter()
 const { currentSurah, loading, error, fetchSurahDetail } = useQuran()
 const store = useQuranStore()
 const bookmarkStore = useBookmarkStore()
+const odojStore = useOdojStore()
+
+let observer: IntersectionObserver | null = null
 
 onMounted(() => {
   const id = Number(route.params.id)
   if (id) {
     fetchSurahDetail(id)
   }
+  setupObserver()
 })
 
 watch(() => route.params.id, (newId) => {
   if (newId) {
     fetchSurahDetail(Number(newId))
+    setTimeout(setupObserver, 1000)
   }
+})
+
+const setupObserver = () => {
+  if (observer) observer.disconnect()
+
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const ayahId = entry.target.id // format: "ayat-1"
+        const ayahNumber = parseInt(ayahId.split('-')[1])
+        if (currentSurah.value) {
+          odojStore.markAyahAsRead(currentSurah.value.nomor, ayahNumber)
+        }
+      }
+    })
+  }, { threshold: 0.7 })
+
+  const ayats = document.querySelectorAll('[id^="ayat-"]')
+  ayats.forEach(el => observer?.observe(el))
+}
+
+watch(() => currentSurah.value, () => {
+  setTimeout(setupObserver, 500)
 })
 
 const goBack = () => router.push('/quran')

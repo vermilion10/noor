@@ -17,7 +17,7 @@
 ## API Credits
 This project was made possible by the incredible work of the following open-source APIs:
 - **[Al Quran Cloud API](https://alquran.cloud/api)** - Used for fetching Al-Quran data sequentially by Juz (`id.indonesian`).
-- **[eQuran / MyQuran API](https://equran.id/apidev/v2)** - Used for reliable Indonesian Prayer Times (Jadwal Sholat Kemenag) drill-down tracking, as well as accessing Surahs.
+- **[eQuran API](https://equran.id/apidev/v2) [MyQuran API](https://api.myquran.com/)** - Used for reliable Indonesian Prayer Times (Jadwal Sholat Kemenag) drill-down tracking, as well as accessing Surahs.
 - **[Aladhan API](https://aladhan.com/prayer-api)** - Used for Hijri-Gregorian calendar conversion and detecting Islamic Holidays dynamically.
 
 ## Installation & Development

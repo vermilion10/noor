@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useJuz } from '@/composables/useJuz'
 import { useQuranStore } from '@/stores/quranStore'
 import { useBookmarkStore } from '@/stores/bookmarkStore'
+import { useOdojStore } from '@/stores/odojStore'
 import { ArrowLeft, Settings2, BookmarkPlus, Info } from 'lucide-vue-next'
 
 const route = useRoute()
@@ -12,6 +13,9 @@ const router = useRouter()
 const { currentJuz, loading, error, fetchJuz } = useJuz()
 const store = useQuranStore()
 const bookmarkStore = useBookmarkStore()
+const odojStore = useOdojStore()
+
+let observer: IntersectionObserver | null = null
 
 const activeTafsir = ref<{ ayat: number, teks: string } | null>(null)
 
@@ -36,12 +40,37 @@ onMounted(() => {
   if (id) {
     fetchJuz(id)
   }
+  setupObserver()
 })
 
 watch(() => route.params.id, (newId) => {
   if (newId) {
     fetchJuz(Number(newId))
+    setTimeout(setupObserver, 1000)
   }
+})
+
+const setupObserver = () => {
+  if (observer) observer.disconnect()
+
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const globalNumber = parseInt(entry.target.id.split('-')[1])
+        const ayahData = currentJuz.value?.ayahs.find(a => a.number === globalNumber)
+        if (ayahData) {
+          odojStore.markAyahAsRead(ayahData.surah.number, ayahData.numberInSurah)
+        }
+      }
+    })
+  }, { threshold: 0.7 })
+
+  const ayats = document.querySelectorAll('[id^="ayat-"]')
+  ayats.forEach(el => observer?.observe(el))
+}
+
+watch(() => currentJuz.value, () => {
+  setTimeout(setupObserver, 500)
 })
 
 const goBack = () => router.push('/quran')
