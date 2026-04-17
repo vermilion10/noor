@@ -60,8 +60,21 @@ const setupObserver = () => {
   ayats.forEach(el => observer?.observe(el))
 }
 
+const scrollToLastRead = () => {
+  const lastRead = odojStore.lastReadOdoj
+  if (lastRead && lastRead.surahId === currentSurah.value?.nomor) {
+    const el = document.getElementById(`ayat-${lastRead.ayahNumber}`)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }
+}
+
 watch(() => currentSurah.value, () => {
-  setTimeout(setupObserver, 500)
+  setTimeout(() => {
+    setupObserver()
+    scrollToLastRead()
+  }, 500)
 })
 
 const goBack = () => router.push('/quran')

@@ -14,6 +14,7 @@ export const useOdojStore = defineStore('odoj', () => {
   const history = ref<DailyRecord[]>([])
   
   const readAyahsToday = ref<Record<string, string[]>>({})
+  const lastReadOdoj = ref<{ juzId: number, surahId: number, ayahNumber: number } | null>(null)
 
   const odojMode = ref<'hijri' | 'masehi'>('hijri')
   const hijriInfo = ref<{ day: number, month: string, year: number } | null>(null)
@@ -111,6 +112,11 @@ export const useOdojStore = defineStore('odoj', () => {
       
       if (ayahJuz === targetJuz) {
         addAyatRead(1)
+        lastReadOdoj.value = { 
+          juzId: targetJuz, 
+          surahId: Number(surahId), 
+          ayahNumber: ayahNumber 
+        }
       }
     }
   }
@@ -213,6 +219,7 @@ export const useOdojStore = defineStore('odoj', () => {
     hijriInfo,
     fetchHijriDate,
     currentHijriDate,
+    lastReadOdoj,
     getTodayJuz,
     getAyahCountForJuz,
     syncTodayTarget,
