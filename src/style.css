@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Custom Scrollbar for better UI on Desktop */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: theme('colors.noor.bg');
+}
+::-webkit-scrollbar-thumb {
+  background: theme('colors.noor.border');
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.noor.primary');
+}
+
+/* Base styles for Arabic text */
+.arabic-text {
+  font-family: theme('fontFamily.arabic');
+  line-height: 2.2;
+}

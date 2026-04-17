@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "arab": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ. بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ. الرَّحْمَٰنِ الرَّحِيمِ. مَالِكِ يَوْمِ الدِّينِ. إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ. اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ. صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ.",
+    "latin": "A'uudzu billaahi minasy syaithoonir rojiim... (Al-Fatihah 1-7)",
+    "arti": "Aku berlindung kepada Allah dari godaan syaitan yang terkutuk. Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha Penyayang. Segala puji bagi Allah, Tuhan semesta alam...",
+    "count": 1
+  },
+  {
+    "id": 2,
+    "arab": "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",
+    "latin": "Allahu laa ilaaha illaa huwal hayyul qoyyuum...",
+    "arti": "Allah, tidak ada Tuhan (yang berhak disembah) melainkan Dia Yang Hidup kekal lagi terus menerus mengurus (makhluk-Nya)... (Ayat Kursi)",
+    "count": 1
+  },
+  {
+    "id": 3,
+    "arab": "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا وَرَسُولًا",
+    "latin": "Rodhiitu billaahi robbaa, wabil islaami diinaa, wabi muhammadin shollallaahu 'alaihi wasallama nabiyyaw warosuulaa.",
+    "arti": "Aku rela Allah sebagai Tuhan, Islam sebagai agama, dan Muhammad SAW sebagai nabi dan rasul.",
+    "count": 3
+  },
+  {
+    "id": 4,
+    "arab": "حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ ۖ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",
+    "latin": "Hasbiyallaahu laa ilaaha illa huw, 'alaihi tawakkaltu wa huwa robbul 'arsyil 'azhiim.",
+    "arti": "Cukuplah Allah bagiku; tidak ada Tuhan selain Dia. Hanya kepada-Nya aku bertawakkal dan Dia adalah Tuhan yang memiliki 'Arsy yang agung.",
+    "count": 7
+  },
+  {
+    "id": 5,
+    "arab": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ",
+    "latin": "Subhaanallaahi wa bihamdih, 'adada kholqih, wa ridhoo nafsih, wa zinata 'arsyih, wa midaada kalimaatih.",
+    "arti": "Maha Suci Allah dan segala puji bagi-Nya, sebanyak bilangan makhluk-Nya, serela diri-Nya, setimbangan 'Arsy-Nya, dan sebanyak tinta dari kata-kata-Nya.",
+    "count": 3
+  }
+]
