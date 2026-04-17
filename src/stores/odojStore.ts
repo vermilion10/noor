@@ -15,6 +15,58 @@ export const useOdojStore = defineStore('odoj', () => {
   const readAyahsToday = ref<Record<string, string[]>>({})
 
   const odojMode = ref<'hijri' | 'masehi'>('hijri')
+  const hijriInfo = ref<{ day: number, month: string, year: number } | null>(null)
+
+  const fetchHijriDate = async () => {
+    try {
+      const today = new Date()
+      const d = today.getDate().toString().padStart(2, '0')
+      const m = (today.getMonth() + 1).toString().padStart(2, '0')
+      const y = today.getFullYear()
+      const res = await fetch(`https://api.aladhan.com/v1/gToH?date=${d}-${m}-${y}`)
+      const data = await res.json()
+      if (data.code === 200) {
+        const h = data.data.hijri
+        const monthsId: Record<string, string> = {
+          'Muharram': 'Muharram',
+          'Ṣafar': 'Safar',
+          'Rabīʿ al-awwal': 'Rabiul Awwal',
+          'Rabīʿ ath-thānī': 'Rabiul Akhir',
+          'Jumādá al-ūlá': 'Jumadil Awwal',
+          'Jumādá al-ākhirah': 'Jumadil Akhir',
+          'Rajab': 'Rajab',
+          'Shaʿbān': 'Sya\'ban',
+          'Ramaḍān': 'Ramadhan',
+          'Shawwāl': 'Syawal',
+          'Dhū al-Qaʿdah': 'Dzulqa\'dah',
+          'Dhū al-Ḥijjah': 'Dzulhijjah'
+        }
+        hijriInfo.value = {
+          day: parseInt(h.day),
+          month: monthsId[h.month.en] || h.month.en,
+          year: parseInt(h.year)
+        }
+      }
+    } catch (e) {
+      console.error('Failed to fetch Hijri date', e)
+    }
+  }
+
+  const currentHijriDate = computed(() => {
+    if (hijriInfo.value) {
+      return `${hijriInfo.value.day} ${hijriInfo.value.month} ${hijriInfo.value.year} H`
+    }
+    // Fallback logic
+    try {
+      const parts = new Intl.DateTimeFormat('en-u-ca-islamic-uma-nu-latn', {day:'numeric', month:'long', year:'numeric'}).formatToParts(new Date())
+      const d = parts.find(p => p.type === 'day')?.value
+      const m = parts.find(p => p.type === 'month')?.value
+      const y = parts.find(p => p.type === 'year')?.value
+      return `${d} ${m} ${y} H`
+    } catch (e) {
+      return new Date().toLocaleDateString('id-ID')
+    }
+  })
 
   const getCurrentDateStr = (d: Date = new Date()) => {
     if (odojMode.value === 'hijri') {
@@ -64,10 +116,20 @@ export const useOdojStore = defineStore('odoj', () => {
 
   const getTodayJuz = () => {
     if (odojMode.value === 'hijri') {
-      const dStr = new Intl.DateTimeFormat('en-u-ca-islamic', { day: 'numeric' }).format(new Date())
-      let day = parseInt(dStr, 10)
-      if (day > 30) day = 1
-      return day
+      if (hijriInfo.value) {
+        let day = hijriInfo.value.day
+        if (day > 30) day = 1
+        return day
+      }
+      // fallback
+      try {
+        const dStr = new Intl.DateTimeFormat('en-u-ca-islamic', { day: 'numeric' }).format(new Date())
+        let day = parseInt(dStr, 10)
+        if (day > 30) day = 1
+        return day
+      } catch (e) {
+        return new Date().getDate() > 30 ? 1 : new Date().getDate()
+      }
     } else {
       let day = new Date().getDate()
       if (day > 30) day = 1
@@ -141,6 +203,9 @@ export const useOdojStore = defineStore('odoj', () => {
     dailyTargetAyat,
     history,
     odojMode,
+    hijriInfo,
+    fetchHijriDate,
+    currentHijriDate,
     getTodayJuz,
     getAyahCountForJuz,
     syncTodayTarget,
