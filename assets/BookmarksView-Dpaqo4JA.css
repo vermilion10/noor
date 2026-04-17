@@ -1,0 +1,1 @@
+.animate-fade-in[data-v-2078586b]{animation:.2s ease-out fadeIn-2078586b}.animate-slide-up[data-v-2078586b]{animation:.3s cubic-bezier(.175,.885,.32,1.275) slideUp-2078586b}@keyframes fadeIn-2078586b{0%{opacity:0}to{opacity:1}}@keyframes slideUp-2078586b{0%{opacity:0;transform:translateY(20px)scale(.95)}to{opacity:1;transform:translateY(0)scale(1)}}

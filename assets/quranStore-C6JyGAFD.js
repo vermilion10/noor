@@ -1,0 +1,1 @@
+import{z as e}from"./createLucideIcon-nJRduyt2.js";import{n as t}from"./pinia-D14tVSD3.js";var n=t(`quran`,()=>{let t=e(null),n=e(!0);return{lastRead:t,showTranslation:n,isMushafMode:e(!1),currentQari:e(`01`),setLastRead:(e,n,r)=>{t.value={surahId:e,surahName:n,ayahNumber:r}},toggleTranslation:()=>{n.value=!n.value}}},{persist:!0});export{n as t};
