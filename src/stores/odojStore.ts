@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { getAyahCountForJuz } from '@/utils/quranUtils'
+import { getJuzIdForAyah } from '@/utils/juzLookup'
 
 export interface DailyRecord {
   dateStr: string // YYYY-MM-DD
@@ -104,7 +105,13 @@ export const useOdojStore = defineStore('odoj', () => {
     
     if (!readAyahsToday.value[today].includes(key)) {
       readAyahsToday.value[today].push(key)
-      addAyatRead(1)
+
+      const targetJuz = getTodayJuz()
+      const ayahJuz = getJuzIdForAyah(Number(surahId), ayahNumber)
+      
+      if (ayahJuz === targetJuz) {
+        addAyatRead(1)
+      }
     }
   }
 
